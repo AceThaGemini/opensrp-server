@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HHScheduleHandler extends BaseScheduleHandler {	
+public class HHScheduleHandler extends BaseScheduleHandler {
 	
     private HHSchedulesService hhSchedulesService;
     @Autowired

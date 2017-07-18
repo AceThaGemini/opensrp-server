@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ElcoScheduleHandler extends BaseScheduleHandler {	
+public class ElcoScheduleHandler extends BaseScheduleHandler {
 	
-    private ELCOScheduleService elcoScheduleService;	
-    public static final String ELCO_SCHEDULE_PSRF = "ELCO PSRF";	
+    private ELCOScheduleService elcoScheduleService;
+    public static final String ELCO_SCHEDULE_PSRF = "ELCO PSRF";
     public static final String MIS_ELCO = "mis_elco";
     @Autowired
     public ElcoScheduleHandler(ELCOScheduleService elcoScheduleService) {
@@ -20,7 +20,7 @@ public class ElcoScheduleHandler extends BaseScheduleHandler {
     }
     @Override
     public void handle(Event event, JSONObject scheduleConfigEvent,String scheduleName) {
-	    try {
+        try {
             if(scheduleName==null){
                 scheduleName="BirthNotificationPregnancyStatusFollowUp";
             }

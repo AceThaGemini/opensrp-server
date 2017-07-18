@@ -62,7 +62,7 @@ public class ANCScheduleHandlerTest extends TestResourceLoader {
     public void shouldTestANCScheduleHandler() throws Exception {
         Event event = geteventOfVaccination();
         JSONArray schedulesJsonObject = new JSONArray("[" + getFile() + "]");
-        String scheduleName =null;
+        String scheduleName = null;
         for (int i = 0; i < schedulesJsonObject.length(); i++) {
             JSONObject scheduleJsonObject = schedulesJsonObject.getJSONObject(i);            
             JSONArray eventsJsonArray = scheduleJsonObject.getJSONArray(JSON_KEY_EVENTS);                      
@@ -72,7 +72,7 @@ public class ANCScheduleHandlerTest extends TestResourceLoader {
                 List<String> eventsList = jsonArrayToList(eventTypesJsonArray);                
                 if (eventsList.contains(event.getEventType())) {  
                 	String action = aNCScheduleHandler.getAction(scheduleConfigEvent);                	
-                	String milestone=aNCScheduleHandler.getMilestone(scheduleConfigEvent);
+                	String milestone = aNCScheduleHandler.getMilestone(scheduleConfigEvent);
                     LocalDate  date = LocalDate.parse("2016-07-10");
                 	if (milestone.equalsIgnoreCase("opv2") && action.equalsIgnoreCase(ActionType.enroll.toString())) {
                 		aNCScheduleHandler.handle(event,scheduleConfigEvent, scheduleName);

@@ -23,8 +23,8 @@ public class VaccinesScheduleHandler extends BaseScheduleHandler {
     private AllEvents allEvents;
     @Autowired
     public VaccinesScheduleHandler(HealthSchedulerService scheduler,AllEvents allEvents) {
-    	this.scheduler = scheduler;
-    	this.allEvents = allEvents;
+        this.scheduler = scheduler;
+        this.allEvents = allEvents;
     }
     @Override
 	public void handle(Event event, JSONObject scheduleConfigEvent, String scheduleName) {

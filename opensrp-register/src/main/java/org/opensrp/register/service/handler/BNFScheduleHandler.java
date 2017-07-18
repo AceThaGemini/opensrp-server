@@ -24,7 +24,7 @@ public class BNFScheduleHandler extends BaseScheduleHandler {
             if (evaluateEvent(event, scheduleConfigEvent)) {
                 String action = getAction(scheduleConfigEvent);
                 if (action.equalsIgnoreCase(ActionType.enroll.toString())) {
-                    String refDate=getReferenceDateForSchedule(event, scheduleConfigEvent, action);
+                    String refDate = getReferenceDateForSchedule(event, scheduleConfigEvent, action);
                     if(!refDate.isEmpty())
                         bnfSchedulesService.enrollBNF(event.getBaseEntityId(), scheduleName, LocalDate.parse(refDate), event.getId());
                 }
