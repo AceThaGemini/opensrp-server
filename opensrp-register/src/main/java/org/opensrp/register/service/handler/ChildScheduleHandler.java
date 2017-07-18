@@ -16,14 +16,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ChildScheduleHandler extends BaseScheduleHandler {
-    private ENCCSchedulesService enccSchedulesService;	
+    private ENCCSchedulesService enccSchedulesService;
     private ClientService clientService;
     @Autowired
     public ChildScheduleHandler(ENCCSchedulesService enccSchedulesService,ClientService clientService) {
         this.enccSchedulesService = enccSchedulesService;
         this.clientService = clientService;
     }
-	
+    
     @Override
     public void handle(Event event, JSONObject scheduleConfigEvent,String scheduleName) {
         try {
@@ -35,20 +35,17 @@ public class ChildScheduleHandler extends BaseScheduleHandler {
                 //String milestone = getMilestone(scheduleConfigEvent);
                 if (action.equalsIgnoreCase(ActionType.enroll.toString())) {
                     //if (milestone.equalsIgnoreCase("enccrv_1")) {//first milestone is initiated by the nbnf event
-                    List<Client> children = getChildrenIds(event);						
+                    List<Client> children = getChildrenIds(event);
                     if (children != null && !children.isEmpty()) {
                         for (Client client : children) {
                             enccSchedulesService.enrollIntoCorrectMilestoneOfENCCCare(client.getBaseEntityId(), scheduleName, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
-
                         }
                     }
                 }
                 else if (action.equalsIgnoreCase(ActionType.fulfill.toString())) {
                     enccSchedulesService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), scheduleName, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
                 }
-
-            }
-			
+            }			
         }
         catch (JSONException e) {
             logger.error("", e);
@@ -66,8 +63,8 @@ public class ChildScheduleHandler extends BaseScheduleHandler {
     * @param event
     * @return
     */
-    private List<Client> getChildrenIds(Event event) {		
-        Date dateCreated = event.getDateCreated().toDate();		
+    private List<Client> getChildrenIds(Event event) {
+        Date dateCreated = event.getDateCreated().toDate();
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateCreated);
         cal.add(Calendar.DATE, 1);
@@ -75,8 +72,7 @@ public class ChildScheduleHandler extends BaseScheduleHandler {
         cal = Calendar.getInstance();
         cal.setTime(dateCreated);
         cal.add(Calendar.DATE, -1);
-        String dateFrom = dateFormat.format(cal.getTime());
-		
+        String dateFrom = dateFormat.format(cal.getTime());		
         List<Client> children = clientService.findByRelationshipIdAndDateCreated(event.getBaseEntityId(), dateFrom, dateTo);
         return children;
     }
