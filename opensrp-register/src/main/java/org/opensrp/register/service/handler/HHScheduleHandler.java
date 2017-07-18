@@ -13,13 +13,12 @@ public class HHScheduleHandler extends BaseScheduleHandler {
 	
     private HHSchedulesService hhSchedulesService;
     @Autowired
-    public HHScheduleHandler(HHSchedulesService hhSchedulesService){
-        this.hhSchedulesService  = hhSchedulesService;	
+    public HHScheduleHandler(HHSchedulesService hhSchedulesService) {
+        this.hhSchedulesService  = hhSchedulesService;
     }
     @Override
     public void handle(Event event, JSONObject scheduleConfigEvent,String scheduleName) {
         try {
-			
             if(scheduleName==null){
                 scheduleName="FW CENSUS";
             }
@@ -27,7 +26,7 @@ public class HHScheduleHandler extends BaseScheduleHandler {
             if (evaluateEvent(event, scheduleConfigEvent)) {
                 String milestone = getMilestone(scheduleConfigEvent);
                 String action = getAction(scheduleConfigEvent);
-                if (action.equalsIgnoreCase(ActionType.enroll.toString())) {					
+                if (action.equalsIgnoreCase(ActionType.enroll.toString())) {
                     hhSchedulesService.enrollIntoMilestoneOfCensus(event.getBaseEntityId(),
                         getReferenceDateForSchedule(event, scheduleConfigEvent, action), event.getProviderId(), milestone,
                         event.getId());

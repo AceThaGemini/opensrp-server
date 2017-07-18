@@ -15,9 +15,9 @@ public class ANCScheduleHandler extends BaseScheduleHandler {
     @Autowired
     public ANCScheduleHandler(AnteNatalCareSchedulesService ancScheduleService) {
         this.ancScheduleService = ancScheduleService;
-	}
+    }
     @Override
-    public void handle(Event event, JSONObject scheduleConfigEvent,String scheduleName) {		
+    public void handle(Event event, JSONObject scheduleConfigEvent,String scheduleName) {
         try {
             if(scheduleName==null){
                 scheduleName="Ante Natal Care Reminder Visit";
@@ -32,7 +32,7 @@ public class ANCScheduleHandler extends BaseScheduleHandler {
                 } else if (action.equalsIgnoreCase(ActionType.fulfill.toString())) {
                     ancScheduleService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), scheduleName, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
                 }
-            }			
+            }
         }
         catch (JSONException e) {
             logger.error("", e);

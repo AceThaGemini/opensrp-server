@@ -59,7 +59,7 @@ public class ANCScheduleHandlerTest extends TestResourceLoader {
     }   
     
     @Test
-    public void shouldTestANCScheduleHandler() throws Exception{
+    public void shouldTestANCScheduleHandler() throws Exception {
         Event event = geteventOfVaccination();
         JSONArray schedulesJsonObject = new JSONArray("[" + getFile() + "]");
         String scheduleName =null;
@@ -74,17 +74,17 @@ public class ANCScheduleHandlerTest extends TestResourceLoader {
                 	String action = aNCScheduleHandler.getAction(scheduleConfigEvent);                	
                 	String milestone=aNCScheduleHandler.getMilestone(scheduleConfigEvent);
                     LocalDate  date = LocalDate.parse("2016-07-10");
-                	if(milestone.equalsIgnoreCase("opv2") && action.equalsIgnoreCase(ActionType.enroll.toString())){
+                	if (milestone.equalsIgnoreCase("opv2") && action.equalsIgnoreCase(ActionType.enroll.toString())) {
                 		aNCScheduleHandler.handle(event,scheduleConfigEvent, scheduleName);
                         InOrder inOrder = inOrder(anteNatalCareSchedulesService);                        
                         inOrder.verify(anteNatalCareSchedulesService).enrollMother(event.getBaseEntityId(),"Ante Natal Care Reminder Visit", LocalDate.parse("2016-07-10"),
-         					   event.getId());                       
+                            event.getId());                       
                     }
-                    else if(milestone.equalsIgnoreCase("opv2") && action.equalsIgnoreCase(ActionType.fulfill.toString())){
+                    else if (milestone.equalsIgnoreCase("opv2") && action.equalsIgnoreCase(ActionType.fulfill.toString())) {
                     	aNCScheduleHandler.handle(event,scheduleConfigEvent, scheduleName);
                         InOrder inOrder = inOrder(anteNatalCareSchedulesService);                                                
                         inOrder.verify(anteNatalCareSchedulesService).fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), "Ante Natal Care Reminder Visit", date, event.getId()); 
-                    }else{
+                    } else {
                     	
                     }
                 }				

@@ -15,12 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChildScheduleHandler extends BaseScheduleHandler {	
-	
+public class ChildScheduleHandler extends BaseScheduleHandler {
     private ENCCSchedulesService enccSchedulesService;	
     private ClientService clientService;
     @Autowired
-    public ChildScheduleHandler(ENCCSchedulesService enccSchedulesService,ClientService clientService){
+    public ChildScheduleHandler(ENCCSchedulesService enccSchedulesService,ClientService clientService) {
         this.enccSchedulesService = enccSchedulesService;
         this.clientService = clientService;
     }
@@ -44,7 +43,7 @@ public class ChildScheduleHandler extends BaseScheduleHandler {
                         }
                     }
                 }
-                else if (action.equalsIgnoreCase(ActionType.fulfill.toString())) {					
+                else if (action.equalsIgnoreCase(ActionType.fulfill.toString())) {
                     enccSchedulesService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), scheduleName, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
                 }
 
