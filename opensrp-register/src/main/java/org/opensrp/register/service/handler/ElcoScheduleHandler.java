@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ElcoScheduleHandler extends BaseScheduleHandler {
-	
     private ELCOScheduleService elcoScheduleService;
     public static final String ELCO_SCHEDULE_PSRF = "ELCO PSRF";
     public static final String MIS_ELCO = "mis_elco";
@@ -30,16 +29,16 @@ public class ElcoScheduleHandler extends BaseScheduleHandler {
                 if (action.equalsIgnoreCase(ActionType.enroll.toString())) {
                     elcoScheduleService.imediateEnrollIntoMilestoneOfPSRF(event.getBaseEntityId(),
                         getReferenceDateForSchedule(event, scheduleConfigEvent, action), event.getProviderId(),
-	                    ELCO_SCHEDULE_PSRF, event.getId());
-	            }
-	            else if (action.equalsIgnoreCase(ActionType.fulfill.toString())) {
-	                elcoScheduleService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), ELCO_SCHEDULE_PSRF, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
-	            }
-	        }
+                        ELCO_SCHEDULE_PSRF, event.getId());
+                }
+                else if (action.equalsIgnoreCase(ActionType.fulfill.toString())) {
+                    elcoScheduleService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), ELCO_SCHEDULE_PSRF, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
+                }
+            }
 			
-	    }
-	    catch (JSONException e) {
-	        logger.error("", e);
-	    }
+        }
+        catch (JSONException e) {
+            logger.error("", e);
+        }
     }
 }
