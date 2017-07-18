@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HHScheduleHandler extends BaseScheduleHandler {
-	
     private HHSchedulesService hhSchedulesService;
     @Autowired
     public HHScheduleHandler(HHSchedulesService hhSchedulesService) {
@@ -18,11 +17,10 @@ public class HHScheduleHandler extends BaseScheduleHandler {
     }
     @Override
     public void handle(Event event, JSONObject scheduleConfigEvent,String scheduleName) {
-        try {
+       try {
             if(scheduleName==null){
                 scheduleName="FW CENSUS";
             }
-			
             if (evaluateEvent(event, scheduleConfigEvent)) {
                 String milestone = getMilestone(scheduleConfigEvent);
                 String action = getAction(scheduleConfigEvent);
@@ -34,7 +32,6 @@ public class HHScheduleHandler extends BaseScheduleHandler {
                     hhSchedulesService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), scheduleName, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
                 }
             }
-			
         }
         catch (JSONException e) {
             logger.error("", e);

@@ -35,7 +35,6 @@ public class ElcoScheduleHandler extends BaseScheduleHandler {
                     elcoScheduleService.fullfillMilestone(event.getBaseEntityId(), event.getProviderId(), ELCO_SCHEDULE_PSRF, LocalDate.parse(getReferenceDateForSchedule(event, scheduleConfigEvent, action)), event.getId());
                 }
             }
-			
         }
         catch (JSONException e) {
             logger.error("", e);
