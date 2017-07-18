@@ -27,7 +27,7 @@ public class VaccinesScheduleHandler extends BaseScheduleHandler {
         this.allEvents = allEvents;
     }
     @Override
-	public void handle(Event event, JSONObject scheduleConfigEvent, String scheduleName) {
+    public void handle(Event event, JSONObject scheduleConfigEvent, String scheduleName) {
         try {
             String action = getAction(scheduleConfigEvent);
             if (evaluateEvent(event, scheduleConfigEvent)) {				
